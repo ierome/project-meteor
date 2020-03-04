@@ -1,0 +1,21 @@
+<template name="todo">
+    <style>
+        .button-container {
+            position: absolute;
+            right: 10px;
+            top: 15px;
+        }
+        .card-panel {
+            position: relative;
+        }
+    </style>
+    <div class="card-panel">
+        <span class="blue-text text-darken-2">{{name}} <strong>Added by: {{username}}</strong></span>
+        <div class="button-container">
+            {{#if isCompleted completed}}
+                <button class="completeButton waves-effect waves-light btn">Complete</button>
+            {{/if}}
+            <button class="deleteButton waves-effect waves-light btn red darken-4">Delete</button>
+        </div>
+    </div>
+</template>

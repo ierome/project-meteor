@@ -1,22 +1,24 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-
+import { Todos } from '../lib/collections';
 import './main.html';
+import './components/navbar/';
+import './components/todo-item/todo-item'
+import './components/todo-add/todo-add'
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
-
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
+Template.body.helpers({
+  todos(){
+    return Todos.find({completed: false})
   },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
+  completedTodos(){
+    return Todos.find({completed: true})
   },
-});
+  'isValid': function(arr){
+    let count = Todos.find({completed: true}).count()
+    if (count == 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+})
